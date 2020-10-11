@@ -1,0 +1,18 @@
+.answer {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.answer:hover {
+    background: rgba(255, 255, 255, .2);
+    transition: background .3s;
+}
+.answer.succses {
+    background: rgba(161, 240, 169, .7);
+}
+.answer.error {
+    background: rgba(240, 87, 108, .7);
+}
