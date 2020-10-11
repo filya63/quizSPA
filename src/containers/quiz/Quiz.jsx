@@ -67,13 +67,24 @@ export default class Quiz extends Component {
     }
   };
 
+  onClearQuiz = () => {
+    this.setState({
+      results: {},
+      isFinished: false,
+      activeQuestion: 0,
+      colorState: null
+    });
+  }
   render() {
     return (
       <div className={classes.quiz}>
         <div className={classes.quizWrapper}>
           <h1>Quiz</h1>
           {this.state.isFinished ? (
-            <ResultPage/>
+            <ResultPage
+              results={this.state.results}
+              quiz={this.state.quiz}
+              onClearQuiz={this.onClearQuiz}/>
           ) : (
             <ActiveQuiz
               answers={this.state.quiz[this.state.activeQuestion].answers}
