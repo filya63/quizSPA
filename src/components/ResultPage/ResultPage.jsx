@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './ResultPage.module.css';
+import Button from '../ui/button';
 
 const ResultPage = props => {
     const successCount = Object.keys(props.results).reduce((total, key) => {
@@ -30,7 +31,8 @@ const ResultPage = props => {
                 })}
             </ul>
             <p>Правильно {successCount} из {props.quiz.length}</p>
-            <button onClick={props.onClearQuiz}>Повторить</button>
+            <Button onClick={props.onClearQuiz} type='primary'>Повторить</Button>
+            <Button type='success'>Перейти в список тестов</Button>
         </div>
     )
 }

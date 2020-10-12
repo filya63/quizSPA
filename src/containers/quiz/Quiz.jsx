@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "./Quiz.module.css";
-import ActiveQuiz from "../../components/activeQuiz";
-import ResultPage from './../../components/ResultPage';
+import ActiveQuiz from "../../components/ActiveQuiz";
+import ResultPage from '../../components/ResultPage';
 
 export default class Quiz extends Component {
   state = {
