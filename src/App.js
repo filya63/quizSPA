@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Templates from './hoc/Templates';
 import { Route, Switch } from 'react-router-dom';
 import Quiz from './containers/quiz';
