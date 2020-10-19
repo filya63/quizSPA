@@ -45,24 +45,21 @@ const QuizCreator = () => {
         console.log('Создали тест')
     }
     const onChangeHandler = (value, controlName) => {
-        const formControls = { ...state.formControls };
-        const control = {...formControls[controlName]};
+        const formControls = { ...state.formControl }; // делаем копию state
+        const control = {...formControls[controlName]}; 
 
         control.value = value;
         control.touched = true;
         control.valid = validateControl(control.value, control.validation);
-
-        let isFormValid = true;
-        Object.keys(formControls).forEach(name => {
-            isFormValid = formControls[name].valid && isFormValid;
-        })
         
         formControls[controlName] = control;
-        console.log(formControls)
-        setState({
-            formControls,
-            isFormValid: validateForm(formControls)
-          })
+        setState(prev => {
+            return {
+                ...prev,
+                formControl: formControls,
+                isFormValid: validateForm(formControls)
+            }
+        })
     }
     const renderInputs = () => {
         return Object.keys(state.formControl).map((controlName, index) => {
@@ -90,7 +87,6 @@ const QuizCreator = () => {
             rigthAnswerId: +event.target.value
         })
     }
-    console.log(state);
     return (
         <div className={classes.QuizCreator}>
             <h1>Создание теста</h1>

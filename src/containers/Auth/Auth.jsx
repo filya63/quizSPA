@@ -74,7 +74,6 @@ const Auth = () => {
     const renderInputs = () => {
         return Object.keys(state.formControls).map((controlName, index) => {
             const control = state.formControls[controlName];
-            console.log(control);
             return (
                 <Input
                     key={controlName + index}
