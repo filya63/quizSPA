@@ -36,13 +36,50 @@ const QuizCreator = () => {
     });
     const submitForm = event => {
         event.preventDefault();
-        console.log('Форма отправлена')
     }
     const addQuestionHandler = () => {
-        console.log('Добавили вопрос')
+        console.log('Добавили вопрос', state)
+        const quiz = state.quiz.concat(); // скопируем массив в переменную quiz,
+        // чтобы избежать мутабельности. Это один из вариантов, как можно сделать
+        const index = state.quiz.length + 1;
+
+        const {question, option1, option2, option3, option4} = state.formControl;
+
+        const questionItem = {
+            question: question.value,
+            id: index,
+            rigthAnswerId: state.rigthAnswerId,
+            answers: [
+                {id: option1.id, text: option1.value},
+                {id: option2.id, text: option2.value},
+                {id: option3.id, text: option3.value},
+                {id: option4.id, text: option4.value},
+            ]
+        }
+        quiz.push(questionItem);
+
+        setState(prev => {
+            return {
+                ...prev,
+                quiz,
+                rigthAnswerId: 1,
+                isFormValid: false,
+                formControl: {
+                    question: formControl({
+                        label: 'Введите вопрос',
+                        errorMessage: 'Поле не может быть пустым. Введите вопрос!'
+                    }, {required: true}),
+                    option1: createOptionForm(1),
+                    option2: createOptionForm(2),
+                    option3: createOptionForm(3),
+                    option4: createOptionForm(4)
+                }
+            }
+        })
     }
-    const createTestHandler = () => {
-        console.log('Создали тест')
+    const createTestHandler = event => {
+        event.preventDefault();
+        console.log(state.quiz)
     }
     const onChangeHandler = (value, controlName) => {
         const formControls = { ...state.formControl }; // делаем копию state
@@ -98,8 +135,8 @@ const QuizCreator = () => {
                     value={state.rigthAnswerId}
                     options={state.options}
                 />
-                <Button onClick={addQuestionHandler} type="primary">Добавить вопрос</Button>
-                <Button onClick={createTestHandler} type="success">Создать тест</Button>
+                <Button type="primary" onClick={addQuestionHandler} disabled={state.isFormValid ? false : true}>Добавить вопрос</Button>
+                <Button type="success" onClick={createTestHandler} disabled={state.quiz.length ? false : true}>Создать тест</Button>
             </form>
         </div>
     )
